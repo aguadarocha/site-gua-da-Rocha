@@ -48,7 +48,7 @@ const EBOOKS = [
     language: "Português (Brasil)",
     keywords: ["foco", "aprendizagem", "estudo", "concentração", "produtividade", "atenção"],
     cover: "../photo_5084776688016624846_y.jpg",
-    pdf: "../1.pdf"
+    pdf: "../pdf/1.pdf"
   },
   {
     id: "horta-em-casa",
