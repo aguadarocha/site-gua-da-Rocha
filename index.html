@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Água da Rocha — Biblioteca digital gratuita de e-books</title>
+<meta name="description" content="Água da Rocha é uma plataforma gratuita para descobrir e baixar e-books sobre desenvolvimento pessoal, produtividade, vida cristã e muito mais. Conhecimento gratuito para transformar vidas.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><path fill=%22%2314B8A6%22 d=%22M12 2C12 2 5 11.5 5 15.5C5 19.6 8.4 23 12 23C15.6 23 19 19.6 19 15.5C19 11.5 12 2 12 2Z%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<main>
+
+  <!-- ================= BANNER PRINCIPAL ================= -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">Biblioteca digital gratuita</p>
+      <h1>Conhecimento gratuito<br>para <span class="accent">transformar vidas</span>.</h1>
+      <p class="subtitle">Descubra, explore e baixe e-books gratuitos sobre desenvolvimento pessoal, produtividade, fé e muito mais — em uma experiência pensada para leitura confortável, onde quer que você esteja.</p>
+      <div class="hero-actions">
+        <a href="biblioteca/index.html" class="btn btn-primary btn-lg">Explorar Biblioteca</a>
+        <a href="sobre/index.html" class="btn btn-outline btn-lg">Conheça o Projeto</a>
+      </div>
+    </div>
+
+    <!-- Assinatura visual: rocha com gotas d'água (Êxodo 17:6) -->
+    <svg class="hero-rock" viewBox="0 0 420 420" aria-hidden="true">
+      <path d="M60 300 Q40 250 90 220 Q80 170 140 160 Q160 110 220 120 Q270 90 310 130 Q360 140 350 200 Q380 230 350 280 Q360 330 300 340 L110 340 Q60 340 60 300Z" fill="#1F2937" stroke="#374151" stroke-width="2"/>
+      <circle class="drop-fall" cx="150" cy="60" r="6" fill="#14B8A6"/>
+      <circle class="drop-fall d2" cx="210" cy="40" r="8" fill="#14B8A6"/>
+      <circle class="drop-fall d3" cx="270" cy="70" r="5" fill="#14B8A6"/>
+    </svg>
+  </section>
+
+  <svg class="wave-divider" viewBox="0 0 1440 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 C 240 44 480 0 720 18 C 960 36 1200 8 1440 22 L1440 44 L0 44 Z"></path></svg>
+
+  <!-- ================= CATEGORIAS EM DESTAQUE ================= -->
+  <section class="bg-soft">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Navegue por temas</p>
+        <h2>Categorias em destaque</h2>
+        <p>Encontre o próximo e-book pelo assunto que mais importa para você agora.</p>
+      </div>
+      <div id="home-categories" class="pillar-grid"></div>
+    </div>
+  </section>
+
+  <!-- ================= NOVIDADES ================= -->
+  <section>
+    <div class="container">
+      <div class="view-all-row reveal">
+        <div class="section-head" style="margin-bottom:0;">
+          <p class="eyebrow">Recém-adicionados</p>
+          <h2>Novidades na biblioteca</h2>
+        </div>
+        <a href="biblioteca/index.html?sort=novos" class="btn btn-ghost">Ver todos →</a>
+      </div>
+      <div id="home-novidades" class="book-grid"></div>
+    </div>
+  </section>
+
+  <!-- ================= MAIS BAIXADOS ================= -->
+  <section class="bg-soft">
+    <div class="container">
+      <div class="view-all-row reveal">
+        <div class="section-head" style="margin-bottom:0;">
+          <p class="eyebrow">Preferidos da comunidade</p>
+          <h2>Mais baixados</h2>
+        </div>
+        <a href="biblioteca/index.html?sort=populares" class="btn btn-ghost">Ver todos →</a>
+      </div>
+      <div id="home-populares" class="book-grid"></div>
+    </div>
+  </section>
+
+  <!-- ================= CTA APOIAR ================= -->
+  <section class="cta-band">
+    <div class="container reveal">
+      <h2>Este projeto é mantido de forma gratuita.</h2>
+      <p>Se algum e-book te ajudou, considere apoiar o Água da Rocha para que continuemos produzindo conteúdo livre para todos.</p>
+      <a href="apoiar/index.html" class="btn btn-primary btn-lg">Apoiar o projeto</a>
+    </div>
+  </section>
+
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const ROOT = "";
+  initCommon(ROOT, "index.html");
+
+  // Categorias em destaque (6 primeiras)
+  const catIcons = { sprout: ICONS.drop, "book-open": ICONS.pages, target: ICONS.check, repeat: ICONS.arrowUp, brain: ICONS.heart, "message-circle": ICONS.share, heart: ICONS.heart, coins: ICONS.check, droplet: ICONS.drop, scroll: ICONS.pages, book: ICONS.pages, home: ICONS.check, compass: ICONS.globe };
+  const homeCategories = document.getElementById("home-categories");
+  homeCategories.innerHTML = CATEGORIES.slice(0, 6).map(c => `
+    <a class="pillar-card reveal" href="${categoryUrl(ROOT, c.slug)}">
+      ${catIcons[c.icon] || ICONS.drop}
+      <h3>${c.name}</h3>
+      <p>${EBOOKS.filter(b => b.category === c.slug).length} e-book(s) disponível(is)</p>
+    </a>
+  `).join("");
+
+  // Novidades: ordenado por data de publicação, mais recentes primeiro
+  const novidades = [...EBOOKS].sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate)).slice(0, 4);
+  document.getElementById("home-novidades").innerHTML = novidades.map(b => bookCardHtml(ROOT, b)).join("");
+
+  // Mais baixados: como não há backend, usamos uma ordem curada como destaque
+  const populares = [EBOOKS[0], EBOOKS[3], EBOOKS[5], EBOOKS[1]].filter(Boolean);
+  document.getElementById("home-populares").innerHTML = populares.map(b => bookCardHtml(ROOT, b)).join("");
+
+  initLazyLoad();
+  initReveal();
+</script>
+</body>
+</html>
