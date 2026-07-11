@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre — Água da Rocha</title>
+<meta name="description" content="Conheça a missão, os objetivos e a história do Água da Rocha, uma biblioteca digital gratuita.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><path fill=%22%2314B8A6%22 d=%22M12 2C12 2 5 11.5 5 15.5C5 19.6 8.4 23 12 23C15.6 23 19 19.6 19 15.5C19 11.5 12 2 12 2Z%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="../index.html">Início</a><span class="sep">/</span>Sobre</div>
+      <p class="eyebrow" style="margin-top:22px;">Quem somos</p>
+      <h1>Sobre o Água da Rocha</h1>
+      <p>Uma biblioteca digital gratuita, feita para crescer continuamente e acompanhar quem busca aprender.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container prose reveal">
+      <p>Água da Rocha nasceu de uma ideia simples: conhecimento de qualidade não deveria ter preço como barreira. O nome remete à imagem de uma fonte que brota mesmo em lugares áridos — assim como a leitura pode abrir caminho em qualquer fase da vida, quando encontrada no momento certo.</p>
+
+      <h2 id="missao">Missão</h2>
+      <p>Oferecer e-books gratuitos, bem escritos e organizados, que ajudem pessoas reais a estudar melhor, cuidar da mente, das finanças, da família e da fé — sem exigir cadastro, pagamento ou qualquer barreira de acesso.</p>
+
+      <h2 id="objetivos">Objetivos</h2>
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          ${DROP}
+          <h3>Acesso livre</h3>
+          <p>Todo o acervo é e sempre será gratuito, sem letras miúdas.</p>
+        </div>
+        <div class="pillar-card">
+          ${PAGES}
+          <h3>Conteúdo cuidado</h3>
+          <p>Cada e-book é escrito com objetividade, sem enrolação.</p>
+        </div>
+        <div class="pillar-card">
+          ${CHECK}
+          <h3>Crescimento contínuo</h3>
+          <p>A biblioteca é pensada para receber novos títulos com frequência.</p>
+        </div>
+      </div>
+
+      <h2 id="historia">História</h2>
+      <p>O projeto começou com um punhado de e-books escritos para ajudar amigos e familiares em temas do dia a dia — foco nos estudos, organização financeira, hábitos e vida espiritual. Com o tempo, esses materiais ganharam uma casa própria: uma plataforma simples, rápida e sem distrações, onde qualquer pessoa pode encontrar o que precisa e seguir seu caminho de leitura.</p>
+
+      <h2 id="privacidade">Política de Privacidade</h2>
+      <p>O Água da Rocha não exige cadastro para baixar e-books. Não coletamos dados pessoais sensíveis nem compartilhamos informações com terceiros para fins de publicidade. Eventuais dados técnicos de navegação (como estatísticas anônimas de acesso) podem ser usados apenas para melhorar a experiência do site.</p>
+
+      <h2 id="termos">Termos de Uso</h2>
+      <p>O conteúdo disponibilizado é de uso pessoal e gratuito. É permitido compartilhar os links das páginas dos e-books livremente. Não é permitido revender, redistribuir os arquivos como produto próprio ou apresentar o conteúdo como de outra autoria.</p>
+
+      <h2 id="direitos">Direitos Autorais</h2>
+      <p>Todos os e-books e artigos publicados no Água da Rocha têm seus direitos reservados aos seus respectivos autores. A distribuição gratuita não implica cessão de direitos autorais. Em caso de dúvidas sobre uso do conteúdo, entre em contato pelo e-mail informado no rodapé.</p>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  const ROOT = "../";
+  initCommon(ROOT, "sobre/index.html");
+  document.querySelector('.pillar-grid').innerHTML = document.querySelector('.pillar-grid').innerHTML
+    .replace(/\$\{DROP\}/g, ICONS.drop)
+    .replace(/\$\{PAGES\}/g, ICONS.pages)
+    .replace(/\$\{CHECK\}/g, ICONS.check);
+  initReveal();
+</script>
+</body>
+</html>

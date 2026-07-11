@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="520" viewBox="0 0 360 520">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+  </defs>
+  <rect width="360" height="520" fill="url(#g)"/>
+  <circle cx="300" cy="90" r="70" fill="#ffffff" opacity="0.06"/>
+  <circle cx="40" cy="470" r="100" fill="#000000" opacity="0.10"/>
+  <path d="M180 60 C170 90 150 100 150 130 C150 152 165 168 180 168 C195 168 210 152 210 130 C210 100 190 90 180 60 Z" fill="#F9FAFB" opacity="0.85"/>
+  <text font-family="Poppins, Inter, sans-serif" font-size="30" font-weight="600" fill="#F9FAFB" text-anchor="middle"><tspan x="180" y="240">Como Ensinar</tspan><tspan x="180" y="284">Seu Filho a Ler</tspan></text>
+  <text x="180" y="480" font-family="Inter, sans-serif" font-size="14" letter-spacing="2" fill="#F9FAFB" opacity="0.75" text-anchor="middle">ÁGUA DA ROCHA</text>
+</svg>

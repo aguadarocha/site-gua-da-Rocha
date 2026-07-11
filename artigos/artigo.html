@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="doc-title">Artigo — Água da Rocha</title>
+<meta id="doc-desc" name="description" content="Artigo gratuito do Água da Rocha.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><path fill=%22%2314B8A6%22 d=%22M12 2C12 2 5 11.5 5 15.5C5 19.6 8.4 23 12 23C15.6 23 19 19.6 19 15.5C19 11.5 12 2 12 2Z%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<main id="article-main" style="display:none;">
+  <section class="page-hero" style="padding-bottom:0;">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Início</a><span class="sep">/</span>
+        <a href="index.html">Artigos</a><span class="sep">/</span>
+        <span id="crumb-title"></span>
+      </div>
+      <span class="ebook-cat-tag" id="art-cat" style="margin-top:22px;"></span>
+      <h1 id="art-title"></h1>
+      <p id="art-meta" style="color:var(--text-soft); margin-top:8px;"></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="prose" id="art-body"></div>
+    </div>
+  </section>
+</main>
+
+<main id="not-found" style="display:none;">
+  <section class="page-hero">
+    <div class="container">
+      <h1>Artigo não encontrado</h1>
+      <p>O texto que você procura pode ter sido removido ou o link está incorreto.</p>
+      <a href="index.html" class="btn btn-primary" style="margin-top:20px;">Voltar para Artigos</a>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  const ROOT = "../";
+  initCommon(ROOT, "artigos/index.html");
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  const article = ARTICLES.find(a => a.id === id);
+
+  if (!article) {
+    document.getElementById("not-found").style.display = "block";
+  } else {
+    document.getElementById("article-main").style.display = "block";
+    const cat = getCategory(article.category);
+
+    document.getElementById("doc-title").textContent = `${article.title} — Água da Rocha`;
+    document.getElementById("doc-desc").setAttribute("content", article.shortDesc);
+    document.getElementById("crumb-title").textContent = article.title;
+    document.getElementById("art-cat").textContent = cat.name;
+    document.getElementById("art-title").textContent = article.title;
+    document.getElementById("art-meta").textContent = `${formatDate(article.pubDate)} · ${article.readTime} min de leitura`;
+
+    document.getElementById("art-body").innerHTML = article.body.split("\n\n").map(p => `<p>${p}</p>`).join("");
+  }
+</script>
+</body>
+</html>

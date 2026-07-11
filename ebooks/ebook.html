@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="doc-title">E-book — Água da Rocha</title>
+<meta id="doc-desc" name="description" content="Baixe este e-book gratuitamente no Água da Rocha.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><path fill=%22%2314B8A6%22 d=%22M12 2C12 2 5 11.5 5 15.5C5 19.6 8.4 23 12 23C15.6 23 19 19.6 19 15.5C19 11.5 12 2 12 2Z%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<main id="ebook-main" style="display:none;">
+  <section style="padding-bottom:0;">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Início</a><span class="sep">/</span>
+        <a href="../biblioteca/index.html">Biblioteca</a><span class="sep">/</span>
+        <a id="crumb-cat" href="#"></a><span class="sep">/</span>
+        <span id="crumb-title"></span>
+      </div>
+
+      <div class="ebook-hero">
+        <div class="cover-wrap">
+          <img id="eb-cover" src="" alt="">
+        </div>
+        <div>
+          <span class="ebook-cat-tag" id="eb-cat"></span>
+          <h1 id="eb-title"></h1>
+          <p class="desc" id="eb-shortdesc"></p>
+
+          <div class="meta-strip">
+            <div class="meta-item"><strong id="eb-pages"></strong>Páginas</div>
+            <div class="meta-item"><strong id="eb-date"></strong>Publicação</div>
+            <div class="meta-item"><strong id="eb-lang"></strong>Idioma</div>
+          </div>
+
+          <div class="ebook-actions">
+            <a id="eb-download" href="#" download class="btn btn-primary btn-lg">Baixar gratuitamente</a>
+            <button id="eb-share" class="btn btn-outline">Compartilhar</button>
+            <a href="../apoiar/index.html" class="btn btn-ghost">Doação voluntária via Pix</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ebook-body">
+        <h2>Sobre este e-book</h2>
+        <p id="eb-fulldesc"></p>
+
+        <h2>Resumo</h2>
+        <p id="eb-summary"></p>
+
+        <h2>O que você vai aprender</h2>
+        <ul class="learn-list" id="eb-learn"></ul>
+      </div>
+
+      <div class="related-row">
+        <div class="section-head reveal">
+          <p class="eyebrow">Continue explorando</p>
+          <h2>E-books relacionados</h2>
+        </div>
+        <div id="related-grid" class="book-grid"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<main id="not-found" style="display:none;">
+  <section class="page-hero">
+    <div class="container">
+      <h1>E-book não encontrado</h1>
+      <p>O item que você procura pode ter sido removido ou o link está incorreto.</p>
+      <a href="../biblioteca/index.html" class="btn btn-primary" style="margin-top:20px;">Voltar para a Biblioteca</a>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  const ROOT = "../";
+  initCommon(ROOT, "biblioteca/index.html");
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  const book = EBOOKS.find(b => b.id === id);
+
+  if (!book) {
+    document.getElementById("not-found").style.display = "block";
+  } else {
+    document.getElementById("ebook-main").style.display = "block";
+    const cat = getCategory(book.category);
+    const coverSrc = ROOT + book.cover.replace("../", "");
+
+    document.getElementById("doc-title").textContent = `${book.title} — Água da Rocha`;
+    document.getElementById("doc-desc").setAttribute("content", book.shortDesc);
+    document.getElementById("crumb-cat").textContent = cat.name;
+    document.getElementById("crumb-cat").href = categoryUrl(ROOT, cat.slug);
+    document.getElementById("crumb-title").textContent = book.title;
+
+    document.getElementById("eb-cover").src = coverSrc;
+    document.getElementById("eb-cover").alt = `Capa do e-book ${book.title}`;
+    document.getElementById("eb-cat").textContent = cat.name;
+    document.getElementById("eb-title").textContent = book.title;
+    document.getElementById("eb-shortdesc").textContent = book.shortDesc;
+    document.getElementById("eb-pages").textContent = book.pages;
+    document.getElementById("eb-date").textContent = formatDate(book.pubDate);
+    document.getElementById("eb-lang").textContent = book.language;
+    document.getElementById("eb-fulldesc").textContent = book.fullDesc;
+    document.getElementById("eb-summary").textContent = book.summary;
+
+    document.getElementById("eb-learn").innerHTML = book.learn.map(item => `<li>${ICONS.check}<span>${item}</span></li>`).join("");
+
+    const downloadBtn = document.getElementById("eb-download");
+    downloadBtn.href = ROOT + book.pdf.replace("../", "");
+
+    document.getElementById("eb-share").addEventListener("click", async () => {
+      const shareData = { title: book.title, text: book.shortDesc, url: window.location.href };
+      if (navigator.share) {
+        try { await navigator.share(shareData); } catch (e) {}
+      } else {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          const btn = document.getElementById("eb-share");
+          const original = btn.textContent;
+          btn.textContent = "Link copiado!";
+          setTimeout(() => { btn.textContent = original; }, 2000);
+        } catch (e) {}
+      }
+    });
+
+    // Relacionados: mesma categoria, excluindo o atual
+    const related = EBOOKS.filter(b => b.category === book.category && b.id !== book.id).slice(0, 4);
+    const fallback = related.length ? related : EBOOKS.filter(b => b.id !== book.id).slice(0, 4);
+    document.getElementById("related-grid").innerHTML = fallback.map(b => bookCardHtml(ROOT, b)).join("");
+
+    initLazyLoad();
+    initReveal();
+  }
+</script>
+</body>
+</html>

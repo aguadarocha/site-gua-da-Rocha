@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca — Água da Rocha</title>
+<meta name="description" content="Explore todos os e-books gratuitos do Água da Rocha, filtre por categoria e encontre sua próxima leitura.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><path fill=%22%2314B8A6%22 d=%22M12 2C12 2 5 11.5 5 15.5C5 19.6 8.4 23 12 23C15.6 23 19 19.6 19 15.5C19 11.5 12 2 12 2Z%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="../index.html">Início</a><span class="sep">/</span>Biblioteca</div>
+      <p class="eyebrow" style="margin-top:22px;">Todo o acervo</p>
+      <h1 id="page-title">Biblioteca</h1>
+      <p id="page-subtitle">Navegue por todas as categorias ou pesquise pelo título, tema ou autor.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:20px;">
+    <div class="container">
+      <div class="category-tabs" id="category-tabs"></div>
+      <div class="view-all-row reveal" style="margin-bottom:10px;">
+        <span id="result-count" style="color:var(--text-soft); font-size:0.9rem;"></span>
+      </div>
+      <div id="library-grid" class="book-grid"></div>
+      <p id="empty-state" class="grid-empty" style="display:none;">Nenhum e-book encontrado. Tente outra palavra-chave ou categoria.</p>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  const ROOT = "../";
+  initCommon(ROOT, "biblioteca/index.html");
+
+  const params = new URLSearchParams(window.location.search);
+  const qParam = params.get("q") || "";
+  const sortParam = params.get("sort") || "";
+  const catParam = params.get("cat") || "";
+
+  // Tabs de categoria
+  const tabsEl = document.getElementById("category-tabs");
+  tabsEl.innerHTML = `<a href="biblioteca/index.html" class="${!catParam ? 'active' : ''}" data-cat="">Todas</a>` +
+    CATEGORIES.map(c => `<a href="?cat=${c.slug}" class="${catParam === c.slug ? 'active' : ''}" data-cat="${c.slug}">${c.name}</a>`).join("");
+
+  const searchInputTop = document.getElementById("header-search-input");
+  if (qParam && searchInputTop) searchInputTop.value = qParam;
+
+  function renderLibrary() {
+    let list = [...EBOOKS];
+    if (catParam) list = list.filter(b => b.category === catParam);
+    if (qParam) list = searchEbooks(qParam).filter(b => !catParam || b.category === catParam);
+    if (sortParam === "novos") list.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+    if (sortParam === "populares") {
+      const order = ["foco-que-aprende", "alegria-viva", "livre-para-ser-feliz", "horta-em-casa"];
+      list.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id) === 0 ? 0 : (order.indexOf(a.id) === -1 ? 1 : order.indexOf(b.id) === -1 ? -1 : order.indexOf(a.id) - order.indexOf(b.id)));
+    }
+
+    const grid = document.getElementById("library-grid");
+    const empty = document.getElementById("empty-state");
+    const count = document.getElementById("result-count");
+
+    if (qParam) {
+      document.getElementById("page-title").textContent = `Resultados para "${qParam}"`;
+      document.getElementById("page-subtitle").textContent = "Refine sua pesquisa usando as categorias abaixo.";
+    } else if (catParam) {
+      document.getElementById("page-title").textContent = getCategory(catParam).name;
+    }
+
+    count.textContent = `${list.length} e-book${list.length === 1 ? "" : "s"} encontrado${list.length === 1 ? "" : "s"}`;
+
+    if (list.length === 0) {
+      grid.innerHTML = "";
+      empty.style.display = "block";
+    } else {
+      empty.style.display = "none";
+      grid.innerHTML = list.map(b => bookCardHtml(ROOT, b)).join("");
+    }
+    initLazyLoad(grid);
+    initReveal(grid);
+  }
+
+  renderLibrary();
+  initReveal();
+</script>
+</body>
+</html>
