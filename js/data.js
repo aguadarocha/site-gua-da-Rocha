@@ -47,7 +47,7 @@ const EBOOKS = [
     pubDate: "2026-03-10",
     language: "Português (Brasil)",
     keywords: ["foco", "aprendizagem", "estudo", "concentração", "produtividade", "atenção"],
-    cover: "../photo_5084776688016624846_y.jpg",
+    cover: "../img/capas/photo_5084776688016624846_y.jpg",
     pdf: "../pdf/1.pdf"
   },
   {
