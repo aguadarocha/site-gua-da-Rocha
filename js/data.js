@@ -30,8 +30,8 @@ const CATEGORIES = [
 /* ---------- E-books ---------- */
 const EBOOKS = [
   {
-    id: "foco-que-aprende",
-    title: "Foco Que Aprende",
+    id: "No-Controle-da-Propria-Vida",
+    title: "No Controle da Propria Vida",
     author: "Água da Rocha",
     category: "produtividade",
     shortDesc: "Um guia direto para treinar a atenção e aprender com mais profundidade em menos tempo.",
