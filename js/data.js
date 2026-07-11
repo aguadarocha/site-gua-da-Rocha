@@ -90,7 +90,7 @@ const EBOOKS = [
     language: "Português (Brasil)",
     keywords: ["alfabetização", "leitura", "crianças", "educação", "família", "pais"],
     cover: "../img/capas/ensinar-filho-a-ler.svg",
-    pdf: "../pdf/ensinar-filho-a-ler.pdf"
+    pdf: "../1.pdf"
   },
   {
     id: "alegria-viva",
