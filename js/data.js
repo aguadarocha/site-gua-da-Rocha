@@ -48,7 +48,7 @@ const EBOOKS = [
     language: "Português (Brasil)",
     keywords: ["foco", "aprendizagem", "estudo", "concentração", "produtividade", "atenção"],
     cover: "https://github.com/aguadarocha/site-gua-da-Rocha/tree/main/img/capas#:~:text=photo_5084776688016624846_y.jpg",
-    pdf: "../pdf/foco-que-aprende.pdf"
+    pdf: "../No-Controle-da-Propria-Vida.pdf"
   },
   {
     id: "horta-em-casa",
