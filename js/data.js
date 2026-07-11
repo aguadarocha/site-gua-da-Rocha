@@ -34,7 +34,7 @@ const EBOOKS = [
     title: "No Controle da Propria Vida",
     author: "Água da Rocha",
     category: "produtividade",
-    shortDesc: "Um guia direto para treinar a atenção e aprender com mais profundidade em menos tempo.",
+    shortDesc: "Um guia direto para um manual pratico de liderança pessoal",
     fullDesc: "Vivemos cercados de estímulos que fragmentam a atenção. \"Foco Que Aprende\" apresenta um caminho prático para reconstruir a capacidade de concentração e transformar o tempo de estudo em aprendizado real e duradouro, unindo técnicas simples a hábitos sustentáveis do dia a dia.",
     summary: "O livro percorre os motivos pelos quais a mente moderna se distrai com facilidade e propõe um método de estudo em ciclos, aliado a pausas estratégicas e revisão espaçada, para que o leitor aprenda mais com menos esforço mental.",
     learn: [
@@ -43,7 +43,7 @@ const EBOOKS = [
       "Como usar a repetição espaçada para fixar o conteúdo",
       "Rotinas simples para treinar a atenção todos os dias"
     ],
-    pages: 42,
+    pages: 36,
     pubDate: "2026-03-10",
     language: "Português (Brasil)",
     keywords: ["foco", "aprendizagem", "estudo", "concentração", "produtividade", "atenção"],
